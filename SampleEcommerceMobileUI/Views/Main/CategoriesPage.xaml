@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Main.CategoriesPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <VerticalStackLayout Spacing="16" Padding="20,16">
+
+        <!-- Header -->
+        <Label
+            Text="Categories"
+            Style="{StaticResource HeadingLarge}"
+            Margin="0,24,0,0" />
+
+        <Label
+            Text="Browse our collections"
+            Style="{StaticResource BodyMedium}" />
+
+        <!-- Categories Grid -->
+        <CollectionView
+            ItemsSource="{Binding Categories}"
+            SelectionMode="Single"
+            SelectionChanged="OnCategorySelected">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="12" VerticalItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Style="{StaticResource CardFrame}"
+                        HeightRequest="160"
+                        Padding="16">
+                        <VerticalStackLayout
+                            VerticalOptions="Center"
+                            Spacing="12">
+                            <!-- Category Icon -->
+                            <Frame
+                                BackgroundColor="{StaticResource SurfaceVariant}"
+                                CornerRadius="20"
+                                HeightRequest="56"
+                                WidthRequest="56"
+                                Padding="0"
+                                HasShadow="False"
+                                HorizontalOptions="Center">
+                                <Label
+                                    Text="{Binding Icon}"
+                                    FontSize="28"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Frame>
+                            <Label
+                                Text="{Binding Name}"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource TextPrimary}"
+                                HorizontalTextAlignment="Center" />
+                            <Label
+                                Text="{Binding ProductCount, StringFormat='{0} items'}"
+                                FontSize="11"
+                                TextColor="{StaticResource TextLight}"
+                                HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
