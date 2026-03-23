@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Main.CartPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20,16">
+
+        <!-- Header -->
+        <Label
+            Grid.Row="0"
+            Text="My Cart 🛒"
+            Style="{StaticResource HeadingLarge}"
+            Margin="0,24,0,16" />
+
+        <!-- Cart Items -->
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding CartItems}"
+            IsVisible="{Binding HasItems}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource CardFrame}" Padding="12">
+                        <Grid ColumnDefinitions="80, *, Auto" ColumnSpacing="12">
+                            <!-- Item Image -->
+                            <Frame
+                                Grid.Column="0"
+                                BackgroundColor="{StaticResource SurfaceVariant}"
+                                CornerRadius="12"
+                                HeightRequest="80"
+                                WidthRequest="80"
+                                Padding="0"
+                                HasShadow="False">
+                                <Label Text="🛍️" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                            </Frame>
+                            <!-- Item Info -->
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                <Label
+                                    Text="{Binding Product.Name}"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    LineBreakMode="TailTruncation" />
+                                <Label
+                                    Text="{Binding SelectedSize, StringFormat='Size: {0}'}"
+                                    FontSize="11"
+                                    TextColor="{StaticResource TextLight}" />
+                                <Label
+                                    Text="{Binding FormattedTotalPrice}"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource Accent}" />
+                            </VerticalStackLayout>
+                            <!-- Quantity Controls -->
+                            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="4" HorizontalOptions="Center">
+                                <Label Text="🗑️" FontSize="16" HorizontalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartViewModel}}, Path=RemoveItemCommand}"
+                                            CommandParameter="{Binding .}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <HorizontalStackLayout Spacing="8">
+                                    <Frame BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="8" HeightRequest="28" WidthRequest="28" Padding="0" HasShadow="False">
+                                        <Label Text="−" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartViewModel}}, Path=DecrementCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Frame>
+                                    <Label Text="{Binding Quantity}" FontSize="14" FontAttributes="Bold" VerticalOptions="Center" />
+                                    <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="8" HeightRequest="28" WidthRequest="28" Padding="0" HasShadow="False">
+                                        <Label Text="+" FontSize="14" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CartViewModel}}, Path=IncrementCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Empty State -->
+        <VerticalStackLayout
+            Grid.Row="1"
+            IsVisible="{Binding IsCartEmpty}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="16"
+            Padding="40">
+            <Label Text="🛒" FontSize="60" HorizontalOptions="Center" />
+            <Label Text="Your cart is empty" Style="{StaticResource HeadingSmall}" HorizontalTextAlignment="Center" />
+            <Label Text="Add some items to get started!" Style="{StaticResource BodyMedium}" HorizontalTextAlignment="Center" />
+            <Button
+                Text="Continue Shopping"
+                Style="{StaticResource AccentButton}"
+                Command="{Binding ContinueShoppingCommand}" />
+        </VerticalStackLayout>
+
+        <!-- Bottom Summary -->
+        <Frame
+            Grid.Row="2"
+            Style="{StaticResource CardFrame}"
+            IsVisible="{Binding HasItems}"
+            Margin="0,12,0,0"
+            Padding="20">
+            <VerticalStackLayout Spacing="12">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Subtotal" Style="{StaticResource BodyMedium}" />
+                    <Label Grid.Column="1" Text="{Binding FormattedSubtotal}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                </Grid>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Delivery" Style="{StaticResource BodyMedium}" />
+                    <Label Grid.Column="1" Text="{Binding FormattedDeliveryFee}" FontSize="14" TextColor="{StaticResource TextSecondary}" />
+                </Grid>
+                <BoxView HeightRequest="1" Color="{StaticResource Border}" />
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Total" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                    <Label Grid.Column="1" Text="{Binding FormattedTotal}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Accent}" />
+                </Grid>
+                <Button
+                    Text="Proceed to Checkout"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding CheckoutCommand}" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

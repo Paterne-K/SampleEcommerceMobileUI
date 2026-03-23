@@ -1,0 +1,14 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+.vs/
+*.DotSettings.user
+packages/
+*.nupkg
+project.lock.json
+.DS_Store
+Thumbs.db

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SampleEcommerceMobileUI.Views.Authentication.SplashPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="{StaticResource Primary}">
+
+    <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
+        <VerticalStackLayout
+            Spacing="16"
+            VerticalOptions="Center"
+            HorizontalOptions="Center">
+
+            <!-- App Logo/Icon -->
+            <Frame
+                BackgroundColor="{StaticResource Accent}"
+                CornerRadius="30"
+                HeightRequest="80"
+                WidthRequest="80"
+                Padding="0"
+                HasShadow="False"
+                HorizontalOptions="Center">
+                <Label
+                    Text="🛍️"
+                    FontSize="36"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Frame>
+
+            <!-- App Name -->
+            <Label
+                Text="CamShop"
+                FontSize="36"
+                FontAttributes="Bold"
+                TextColor="{StaticResource TextWhite}"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="African Fashion at Your Fingertips"
+                FontSize="14"
+                TextColor="{StaticResource AccentLight}"
+                HorizontalOptions="Center" />
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator
+                IsRunning="True"
+                Color="{StaticResource Accent}"
+                HeightRequest="40"
+                Margin="0,30,0,0" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

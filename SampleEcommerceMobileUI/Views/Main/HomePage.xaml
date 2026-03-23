@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Main.HomePage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20,16">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="*, Auto" Margin="0,24,0,0">
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Hello, Paterne 👋" Style="{StaticResource BodyMedium}" />
+                    <Label Text="Discover African Style" Style="{StaticResource HeadingMedium}" />
+                </VerticalStackLayout>
+                <Frame
+                    Grid.Column="1"
+                    BackgroundColor="{StaticResource SurfaceVariant}"
+                    CornerRadius="24"
+                    HeightRequest="48"
+                    WidthRequest="48"
+                    Padding="0"
+                    HasShadow="False">
+                    <Label Text="🔔" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+            </Grid>
+
+            <!-- Search Bar -->
+            <Frame
+                Style="{StaticResource CardFrame}"
+                Padding="16,4"
+                HasShadow="False"
+                BackgroundColor="{StaticResource SurfaceVariant}">
+                <Grid ColumnDefinitions="Auto, *">
+                    <Label Grid.Column="0" Text="🔍" FontSize="18" VerticalOptions="Center" Margin="0,0,10,0" />
+                    <Entry Grid.Column="1" Placeholder="Search clothes, shoes..." Style="{StaticResource StandardEntry}" BackgroundColor="Transparent" />
+                </Grid>
+            </Frame>
+
+            <!-- Promotions Carousel -->
+            <CarouselView
+                x:Name="PromotionsCarousel"
+                HeightRequest="160"
+                IndicatorView="PromoIndicator"
+                Loop="True"
+                ItemsSource="{Binding Promotions}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            CornerRadius="20"
+                            Padding="24"
+                            HasShadow="True"
+                            BorderColor="Transparent"
+                            BackgroundColor="{Binding BackgroundColor}"
+                            Margin="4">
+                            <Grid>
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="8">
+                                    <Label
+                                        Text="{Binding Title}"
+                                        FontSize="22"
+                                        FontAttributes="Bold"
+                                        TextColor="White" />
+                                    <Label
+                                        Text="{Binding Subtitle}"
+                                        FontSize="13"
+                                        TextColor="#CCFFFFFF" />
+                                    <Button
+                                        Text="Shop Now"
+                                        BackgroundColor="White"
+                                        TextColor="#1B1B1B"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="12"
+                                        HeightRequest="36"
+                                        WidthRequest="100"
+                                        HorizontalOptions="Start"
+                                        Padding="12,0" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                x:Name="PromoIndicator"
+                IndicatorColor="{StaticResource Border}"
+                SelectedIndicatorColor="{StaticResource Accent}"
+                HorizontalOptions="Center" />
+
+            <!-- Categories Section -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="Categories" Style="{StaticResource HeadingSmall}" />
+                <Label Grid.Column="1" Text="See All" Style="{StaticResource BodyMedium}" TextColor="{StaticResource Accent}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSeeAllCategoriesTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <CollectionView
+                ItemsSource="{Binding Categories}"
+                HeightRequest="100"
+                ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout
+                            Spacing="8"
+                            WidthRequest="80"
+                            Margin="0,0,12,0">
+                            <Frame
+                                BackgroundColor="{StaticResource SurfaceVariant}"
+                                CornerRadius="20"
+                                HeightRequest="56"
+                                WidthRequest="56"
+                                Padding="0"
+                                HasShadow="False"
+                                HorizontalOptions="Center">
+                                <Label
+                                    Text="{Binding Icon}"
+                                    FontSize="24"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Frame>
+                            <Label
+                                Text="{Binding Name}"
+                                FontSize="11"
+                                TextColor="{StaticResource TextSecondary}"
+                                HorizontalTextAlignment="Center"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Featured Products -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="Popular Items 🔥" Style="{StaticResource HeadingSmall}" />
+                <Label Grid.Column="1" Text="See All" Style="{StaticResource BodyMedium}" TextColor="{StaticResource Accent}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSeeAllPopularTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <CollectionView
+                ItemsSource="{Binding FeaturedProducts}"
+                HeightRequest="260"
+                ItemsLayout="HorizontalList"
+                SelectionMode="Single"
+                SelectionChanged="OnProductSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Style="{StaticResource CardFrame}"
+                            Padding="0"
+                            WidthRequest="180"
+                            Margin="0,0,12,0">
+                            <VerticalStackLayout Spacing="0">
+                                <!-- Product Image Placeholder -->
+                                <Frame
+                                    BackgroundColor="{StaticResource SurfaceVariant}"
+                                    CornerRadius="16"
+                                    HeightRequest="140"
+                                    HasShadow="False"
+                                    Padding="0"
+                                    Margin="8,8,8,0">
+                                    <Grid>
+                                        <Label
+                                            Text="🛍️"
+                                            FontSize="40"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            TextColor="{StaticResource TextLight}" />
+                                        <!-- Favorite Icon -->
+                                        <Frame
+                                            BackgroundColor="{StaticResource BackgroundWhite}"
+                                            CornerRadius="14"
+                                            HeightRequest="28"
+                                            WidthRequest="28"
+                                            Padding="0"
+                                            HasShadow="False"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Start"
+                                            Margin="8">
+                                            <Label Text="♡" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+                                <!-- Product Info -->
+                                <VerticalStackLayout Padding="12,8" Spacing="4">
+                                    <Label
+                                        Text="{Binding Name}"
+                                        FontSize="14"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource TextPrimary}"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="1" />
+                                    <Label
+                                        Text="{Binding Category}"
+                                        FontSize="11"
+                                        TextColor="{StaticResource TextLight}" />
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding FormattedPrice}"
+                                            Style="{StaticResource PriceLabel}"
+                                            FontSize="14" />
+                                        <HorizontalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="⭐" FontSize="10" />
+                                            <Label Text="{Binding Rating}" FontSize="11" TextColor="{StaticResource TextSecondary}" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- New Arrivals -->
+            <Grid ColumnDefinitions="*, Auto">
+                <Label Grid.Column="0" Text="New Arrivals ✨" Style="{StaticResource HeadingSmall}" />
+                <Label Grid.Column="1" Text="See All" Style="{StaticResource BodyMedium}" TextColor="{StaticResource Accent}" />
+            </Grid>
+
+            <CollectionView
+                ItemsSource="{Binding NewArrivals}"
+                SelectionMode="Single"
+                SelectionChanged="OnProductSelected">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource CardFrame}" Padding="12">
+                            <Grid ColumnDefinitions="80, *" ColumnSpacing="12">
+                                <!-- Product Image -->
+                                <Frame
+                                    Grid.Column="0"
+                                    BackgroundColor="{StaticResource SurfaceVariant}"
+                                    CornerRadius="12"
+                                    HeightRequest="80"
+                                    WidthRequest="80"
+                                    Padding="0"
+                                    HasShadow="False">
+                                    <Label Text="🛍️" FontSize="28" HorizontalOptions="Center" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                                </Frame>
+                                <!-- Product Info -->
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                    <Label
+                                        Text="{Binding Name}"
+                                        FontSize="15"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource TextPrimary}" />
+                                    <Label
+                                        Text="{Binding Category}"
+                                        FontSize="12"
+                                        TextColor="{StaticResource TextLight}" />
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding FormattedPrice}"
+                                            Style="{StaticResource PriceLabel}"
+                                            FontSize="15" />
+                                        <HorizontalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="⭐" FontSize="10" />
+                                            <Label Text="{Binding Rating}" FontSize="11" TextColor="{StaticResource TextSecondary}" />
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Bottom Spacing -->
+            <BoxView HeightRequest="20" Color="Transparent" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

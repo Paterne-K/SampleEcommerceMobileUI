@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.User.ProfilePage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="20,16">
+
+            <!-- Header -->
+            <Label
+                Text="Profile"
+                Style="{StaticResource HeadingLarge}"
+                Margin="0,24,0,0" />
+
+            <!-- Profile Card -->
+            <Frame Style="{StaticResource CardFrame}" Padding="20">
+                <Grid ColumnDefinitions="60, *, Auto" ColumnSpacing="16">
+                    <!-- Avatar -->
+                    <Frame
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Accent}"
+                        CornerRadius="30"
+                        HeightRequest="60"
+                        WidthRequest="60"
+                        Padding="0"
+                        HasShadow="False">
+                        <Label
+                            Text="PK"
+                            FontSize="22"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Frame>
+                    <!-- User Info -->
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                        <Label
+                            Text="{Binding User.Name}"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextPrimary}" />
+                        <Label
+                            Text="{Binding User.Email}"
+                            FontSize="13"
+                            TextColor="{StaticResource TextSecondary}" />
+                    </VerticalStackLayout>
+                    <!-- Edit Button -->
+                    <Label
+                        Grid.Column="2"
+                        Text="✏️"
+                        FontSize="20"
+                        VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditProfileCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Frame>
+
+            <!-- Menu Options -->
+            <Frame Style="{StaticResource CardFrame}" Padding="0">
+                <VerticalStackLayout>
+                    <!-- My Orders -->
+                    <Grid ColumnDefinitions="Auto, *, Auto" Padding="16" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="📦" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <Label Grid.Column="1" Text="My Orders" FontSize="15" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" />
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToOrdersCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource Border}" Margin="16,0" />
+
+                    <!-- Shipping Addresses -->
+                    <Grid ColumnDefinitions="Auto, *, Auto" Padding="16" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="📍" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <Label Grid.Column="1" Text="Shipping Addresses" FontSize="15" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" />
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource Border}" Margin="16,0" />
+
+                    <!-- Payment Methods -->
+                    <Grid ColumnDefinitions="Auto, *, Auto" Padding="16" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="💳" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <Label Grid.Column="1" Text="Payment Methods" FontSize="15" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" />
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource Border}" Margin="16,0" />
+
+                    <!-- Settings -->
+                    <Grid ColumnDefinitions="Auto, *, Auto" Padding="16" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="⚙️" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <Label Grid.Column="1" Text="Settings" FontSize="15" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" />
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}" />
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource Border}" Margin="16,0" />
+
+                    <!-- Help & Support -->
+                    <Grid ColumnDefinitions="Auto, *, Auto" Padding="16" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="❓" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <Label Grid.Column="1" Text="Help &amp; Support" FontSize="15" VerticalOptions="Center" TextColor="{StaticResource TextPrimary}" />
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Logout Button -->
+            <Button
+                Text="Logout"
+                Style="{StaticResource OutlineButton}"
+                TextColor="{StaticResource Error}"
+                BorderColor="{StaticResource Error}"
+                Command="{Binding LogoutCommand}"
+                Margin="0,8,0,0" />
+
+            <!-- App Version -->
+            <Label
+                Text="CamShop v1.0.0"
+                FontSize="12"
+                TextColor="{StaticResource TextLight}"
+                HorizontalTextAlignment="Center"
+                Margin="0,8,0,30" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

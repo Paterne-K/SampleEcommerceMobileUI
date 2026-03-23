@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Checkout.ShippingAddressPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="20,16">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Margin="0,24,0,16">
+            <Label Grid.Column="0" Text="←" FontSize="28" TextColor="{StaticResource TextPrimary}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="1" Text="Shipping Address" Style="{StaticResource HeadingSmall}" VerticalOptions="Center" Margin="16,0,0,0" />
+        </Grid>
+
+        <!-- Address List -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Addresses}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Style="{StaticResource CardFrame}" Padding="16">
+                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                            <!-- Radio Indicator -->
+                            <Frame
+                                Grid.Column="0"
+                                BackgroundColor="{StaticResource SurfaceVariant}"
+                                CornerRadius="14"
+                                HeightRequest="28"
+                                WidthRequest="28"
+                                Padding="0"
+                                HasShadow="False"
+                                VerticalOptions="Start"
+                                Margin="0,4,0,0">
+                                <Label Text="📍" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Frame>
+                            <!-- Address Details -->
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <Label Grid.Column="0" Text="{Binding FullName}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                                    <Frame Grid.Column="1" BackgroundColor="{StaticResource Accent}" CornerRadius="8" Padding="8,2" HasShadow="False" IsVisible="{Binding IsDefault}">
+                                        <Label Text="Default" FontSize="10" TextColor="White" />
+                                    </Frame>
+                                </Grid>
+                                <Label Text="{Binding Phone}" Style="{StaticResource BodyMedium}" />
+                                <Label Text="{Binding FullAddress}" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextLight}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ShippingAddressViewModel}}, Path=SelectAddressCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Continue Button -->
+        <Button
+            Grid.Row="2"
+            Text="Continue"
+            Style="{StaticResource PrimaryButton}"
+            Command="{Binding ContinueCommand}"
+            Margin="0,12,0,20" />
+    </Grid>
+</ContentPage>

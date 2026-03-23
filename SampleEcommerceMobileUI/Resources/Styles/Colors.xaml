@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Primary Colors -->
+    <Color x:Key="Primary">#1B1B1B</Color>
+    <Color x:Key="PrimaryDark">#000000</Color>
+    <Color x:Key="PrimaryLight">#484848</Color>
+
+    <!-- Accent Colors -->
+    <Color x:Key="Accent">#FF6B35</Color>
+    <Color x:Key="AccentDark">#C43E00</Color>
+    <Color x:Key="AccentLight">#FF9D6B</Color>
+
+    <!-- Background Colors -->
+    <Color x:Key="BackgroundLight">#F8F8F8</Color>
+    <Color x:Key="BackgroundWhite">#FFFFFF</Color>
+    <Color x:Key="BackgroundDark">#1B1B1B</Color>
+
+    <!-- Text Colors -->
+    <Color x:Key="TextPrimary">#1B1B1B</Color>
+    <Color x:Key="TextSecondary">#6B7280</Color>
+    <Color x:Key="TextLight">#9CA3AF</Color>
+    <Color x:Key="TextWhite">#FFFFFF</Color>
+
+    <!-- Surface Colors -->
+    <Color x:Key="Surface">#FFFFFF</Color>
+    <Color x:Key="SurfaceVariant">#F3F4F6</Color>
+    <Color x:Key="Border">#E5E7EB</Color>
+
+    <!-- Status Colors -->
+    <Color x:Key="Success">#10B981</Color>
+    <Color x:Key="Warning">#F59E0B</Color>
+    <Color x:Key="Error">#EF4444</Color>
+    <Color x:Key="Info">#3B82F6</Color>
+
+    <!-- Shadow -->
+    <Color x:Key="Shadow">#1A000000</Color>
+
+</ResourceDictionary>

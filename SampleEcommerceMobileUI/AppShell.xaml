@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SampleEcommerceMobileUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:auth="clr-namespace:SampleEcommerceMobileUI.Views.Authentication"
+    xmlns:main="clr-namespace:SampleEcommerceMobileUI.Views.Main"
+    xmlns:checkout="clr-namespace:SampleEcommerceMobileUI.Views.Checkout"
+    xmlns:user="clr-namespace:SampleEcommerceMobileUI.Views.User"
+    Title="CamShop"
+    FlyoutBehavior="Disabled">
+
+    <!-- Authentication Flow (no tabs) -->
+    <ShellContent
+        Route="splash"
+        ContentTemplate="{DataTemplate auth:SplashPage}"
+        Shell.TabBarIsVisible="False"
+        Shell.NavBarIsVisible="False" />
+
+    <!-- Main Tab Navigation -->
+    <TabBar x:Name="MainTabs" Route="main">
+        <ShellContent
+            Title="Home"
+            Icon="home_icon.png"
+            Route="home"
+            ContentTemplate="{DataTemplate main:HomePage}" />
+        <ShellContent
+            Title="Categories"
+            Icon="category_icon.png"
+            Route="categories"
+            ContentTemplate="{DataTemplate main:CategoriesPage}" />
+        <ShellContent
+            Title="Cart"
+            Icon="cart_icon.png"
+            Route="cart"
+            ContentTemplate="{DataTemplate main:CartPage}" />
+        <ShellContent
+            Title="Profile"
+            Icon="profile_icon.png"
+            Route="profile"
+            ContentTemplate="{DataTemplate user:ProfilePage}" />
+    </TabBar>
+
+</Shell>

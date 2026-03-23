@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Authentication.RegisterPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundWhite}">
+
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+
+            <!-- Back Button -->
+            <Label
+                Text="←"
+                FontSize="28"
+                TextColor="{StaticResource TextPrimary}"
+                Margin="0,20,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToLoginCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="8" Margin="0,10,0,0">
+                <Label
+                    Text="Create Account ✨"
+                    Style="{StaticResource HeadingLarge}" />
+                <Label
+                    Text="Join CamShop and discover amazing African fashion"
+                    Style="{StaticResource BodyMedium}" />
+            </VerticalStackLayout>
+
+            <!-- Full Name -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Full Name" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextPrimary}" />
+                <Frame Style="{StaticResource CardFrameSmall}" Padding="4,0" HasShadow="False" BackgroundColor="{StaticResource SurfaceVariant}">
+                    <Entry Placeholder="Enter your full name" Text="{Binding FullName}" Style="{StaticResource StandardEntry}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Email -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Email" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextPrimary}" />
+                <Frame Style="{StaticResource CardFrameSmall}" Padding="4,0" HasShadow="False" BackgroundColor="{StaticResource SurfaceVariant}">
+                    <Entry Placeholder="Enter your email" Text="{Binding Email}" Keyboard="Email" Style="{StaticResource StandardEntry}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Phone -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Phone Number" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextPrimary}" />
+                <Frame Style="{StaticResource CardFrameSmall}" Padding="4,0" HasShadow="False" BackgroundColor="{StaticResource SurfaceVariant}">
+                    <Entry Placeholder="+237 6XX XXX XXX" Text="{Binding Phone}" Keyboard="Telephone" Style="{StaticResource StandardEntry}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Password -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Password" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextPrimary}" />
+                <Frame Style="{StaticResource CardFrameSmall}" Padding="4,0" HasShadow="False" BackgroundColor="{StaticResource SurfaceVariant}">
+                    <Entry Placeholder="Create a password" Text="{Binding Password}" IsPassword="True" Style="{StaticResource StandardEntry}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Confirm Password -->
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Confirm Password" Style="{StaticResource BodyMedium}" TextColor="{StaticResource TextPrimary}" />
+                <Frame Style="{StaticResource CardFrameSmall}" Padding="4,0" HasShadow="False" BackgroundColor="{StaticResource SurfaceVariant}">
+                    <Entry Placeholder="Confirm your password" Text="{Binding ConfirmPassword}" IsPassword="True" Style="{StaticResource StandardEntry}" />
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Register Button -->
+            <Button
+                Text="Create Account"
+                Style="{StaticResource PrimaryButton}"
+                Command="{Binding RegisterCommand}"
+                Margin="0,10,0,0" />
+
+            <!-- Login Link -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="4" Margin="0,10,0,40">
+                <Label Text="Already have an account?" Style="{StaticResource BodyMedium}" />
+                <Label
+                    Text="Sign In"
+                    Style="{StaticResource BodyMedium}"
+                    TextColor="{StaticResource Accent}"
+                    FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToLoginCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

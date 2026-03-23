@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.User.SettingsPage"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundLight}">
+
+    <Grid RowDefinitions="Auto, *" Padding="20,16">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Margin="0,24,0,16">
+            <Label Grid.Column="0" Text="←" FontSize="28" TextColor="{StaticResource TextPrimary}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label Grid.Column="1" Text="Settings" Style="{StaticResource HeadingSmall}" VerticalOptions="Center" Margin="16,0,0,0" />
+        </Grid>
+
+        <!-- Settings Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Notifications -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="🔔" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="Notifications" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Receive order updates and promotions" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="2"
+                            IsToggled="{Binding NotificationsEnabled}"
+                            OnColor="{StaticResource Accent}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </Frame>
+
+                <!-- Dark Mode -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="🌙" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="Dark Mode" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Switch to dark theme" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Switch
+                            Grid.Column="2"
+                            IsToggled="{Binding DarkModeEnabled}"
+                            OnColor="{StaticResource Accent}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </Frame>
+
+                <!-- Language -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="🌐" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="Language" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="{Binding SelectedLanguage}" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                </Frame>
+
+                <!-- Currency -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="💰" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="Currency" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="FCFA (XAF)" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                </Frame>
+
+                <!-- About -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="ℹ️" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="About CamShop" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Version 1.0.0" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                </Frame>
+
+                <!-- Privacy Policy -->
+                <Frame Style="{StaticResource CardFrame}" Padding="16">
+                    <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource SurfaceVariant}" CornerRadius="12" HeightRequest="40" WidthRequest="40" Padding="0" HasShadow="False">
+                            <Label Text="🔒" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Frame>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="Privacy Policy" FontSize="15" TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="Read our privacy policy" FontSize="11" TextColor="{StaticResource TextLight}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="→" FontSize="18" VerticalOptions="Center" TextColor="{StaticResource TextLight}" />
+                    </Grid>
+                </Frame>
+
+                <BoxView HeightRequest="30" Color="Transparent" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

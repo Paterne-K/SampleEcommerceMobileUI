@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SampleEcommerceMobileUI.Components.ProductCard">
+
+    <Frame
+        Style="{StaticResource CardFrame}"
+        Padding="0">
+        <VerticalStackLayout Spacing="0">
+            <!-- Product Image Placeholder -->
+            <Frame
+                BackgroundColor="{StaticResource SurfaceVariant}"
+                CornerRadius="16"
+                HeightRequest="140"
+                HasShadow="False"
+                Padding="0"
+                Margin="8,8,8,0">
+                <Grid>
+                    <Label
+                        Text="🛍️"
+                        FontSize="40"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TextColor="{StaticResource TextLight}" />
+                    <!-- Favorite Heart -->
+                    <Frame
+                        BackgroundColor="{StaticResource BackgroundWhite}"
+                        CornerRadius="14"
+                        HeightRequest="28"
+                        WidthRequest="28"
+                        Padding="0"
+                        HasShadow="False"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="8">
+                        <Label Text="♡" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Frame>
+                </Grid>
+            </Frame>
+            <!-- Product Info -->
+            <VerticalStackLayout Padding="12,8" Spacing="4">
+                <Label
+                    x:Name="ProductNameLabel"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="1" />
+                <Label
+                    x:Name="CategoryLabel"
+                    FontSize="11"
+                    TextColor="{StaticResource TextLight}" />
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label
+                        x:Name="PriceLabel"
+                        Grid.Column="0"
+                        Style="{StaticResource PriceLabel}"
+                        FontSize="14" />
+                    <HorizontalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="⭐" FontSize="10" />
+                        <Label x:Name="RatingLabel" FontSize="11" TextColor="{StaticResource TextSecondary}" />
+                    </HorizontalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>
