@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SampleEcommerceMobileUI.Components.CategoryCard">
+
+    <Frame
+        Style="{StaticResource CardFrame}"
+        Padding="16"
+        HeightRequest="120">
+        <VerticalStackLayout
+            VerticalOptions="Center"
+            Spacing="8">
+            <Frame
+                BackgroundColor="{StaticResource SurfaceVariant}"
+                CornerRadius="16"
+                HeightRequest="44"
+                WidthRequest="44"
+                Padding="0"
+                HasShadow="False"
+                HorizontalOptions="Center">
+                <Label
+                    x:Name="IconLabel"
+                    FontSize="22"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Frame>
+            <Label
+                x:Name="NameLabel"
+                FontSize="13"
+                FontAttributes="Bold"
+                TextColor="{StaticResource TextPrimary}"
+                HorizontalTextAlignment="Center" />
+            <Label
+                x:Name="CountLabel"
+                FontSize="11"
+                TextColor="{StaticResource TextLight}"
+                HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>
