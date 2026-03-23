@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Authentication.OtpVerificationPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundWhite}">
+
+    <ContentPage.BindingContext>
+        <vm:OtpVerificationViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="24" Spacing="20" VerticalOptions="Center">
+
+        <!-- Icon -->
+        <Frame
+            BackgroundColor="{StaticResource SurfaceVariant}"
+            CornerRadius="30"
+            HeightRequest="80"
+            WidthRequest="80"
+            Padding="0"
+            HasShadow="False"
+            HorizontalOptions="Center">
+            <Label
+                Text="📱"
+                FontSize="36"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Frame>
+
+        <!-- Header -->
+        <Label
+            Text="Verification Code"
+            Style="{StaticResource HeadingLarge}"
+            HorizontalTextAlignment="Center" />
+
+        <Label
+            Text="We have sent a verification code to your phone number"
+            Style="{StaticResource BodyMedium}"
+            HorizontalTextAlignment="Center"
+            Margin="20,0" />
+
+        <!-- OTP Input Fields -->
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="12" Margin="0,20">
+            <Frame Style="{StaticResource CardFrameSmall}" WidthRequest="60" HeightRequest="60" Padding="0">
+                <Entry
+                    Text="{Binding Otp1}"
+                    Keyboard="Numeric"
+                    MaxLength="1"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+            <Frame Style="{StaticResource CardFrameSmall}" WidthRequest="60" HeightRequest="60" Padding="0">
+                <Entry
+                    Text="{Binding Otp2}"
+                    Keyboard="Numeric"
+                    MaxLength="1"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+            <Frame Style="{StaticResource CardFrameSmall}" WidthRequest="60" HeightRequest="60" Padding="0">
+                <Entry
+                    Text="{Binding Otp3}"
+                    Keyboard="Numeric"
+                    MaxLength="1"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+            <Frame Style="{StaticResource CardFrameSmall}" WidthRequest="60" HeightRequest="60" Padding="0">
+                <Entry
+                    Text="{Binding Otp4}"
+                    Keyboard="Numeric"
+                    MaxLength="1"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Frame>
+        </HorizontalStackLayout>
+
+        <!-- Verify Button -->
+        <Button
+            Text="Verify"
+            Style="{StaticResource PrimaryButton}"
+            Command="{Binding VerifyCommand}"
+            Margin="0,10,0,0" />
+
+        <!-- Resend Code -->
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+            <Label Text="Didn't receive the code?" Style="{StaticResource BodyMedium}" />
+            <Label
+                Text="Resend"
+                Style="{StaticResource BodyMedium}"
+                TextColor="{StaticResource Accent}"
+                FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ResendCodeCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

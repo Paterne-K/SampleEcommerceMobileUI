@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SampleEcommerceMobileUI.ViewModels"
+    x:Class="SampleEcommerceMobileUI.Views.Authentication.OnboardingPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="{StaticResource BackgroundWhite}">
+
+    <Grid RowDefinitions="*, Auto" Padding="24">
+
+        <!-- Onboarding Content -->
+        <CarouselView
+            x:Name="OnboardingCarousel"
+            IndicatorView="OnboardingIndicator"
+            Loop="False"
+            Grid.Row="0">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout
+                        Spacing="20"
+                        VerticalOptions="Center"
+                        Padding="16">
+
+                        <!-- Illustration Placeholder -->
+                        <Frame
+                            BackgroundColor="{StaticResource SurfaceVariant}"
+                            CornerRadius="24"
+                            HeightRequest="300"
+                            HasShadow="False"
+                            Padding="0"
+                            HorizontalOptions="Fill">
+                            <Label
+                                Text="{Binding ImageUrl}"
+                                FontSize="80"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                TextColor="{StaticResource TextLight}" />
+                        </Frame>
+
+                        <Label
+                            Text="{Binding Title}"
+                            Style="{StaticResource HeadingLarge}"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding Description}"
+                            Style="{StaticResource BodyMedium}"
+                            HorizontalTextAlignment="Center"
+                            Margin="0,0,0,20" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- Bottom Section -->
+        <VerticalStackLayout Grid.Row="1" Spacing="16" Margin="0,0,0,20">
+            <IndicatorView
+                x:Name="OnboardingIndicator"
+                IndicatorColor="{StaticResource Border}"
+                SelectedIndicatorColor="{StaticResource Primary}"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Get Started"
+                Style="{StaticResource PrimaryButton}"
+                Clicked="OnGetStartedClicked" />
+
+            <Button
+                Text="I already have an account"
+                Style="{StaticResource OutlineButton}"
+                Clicked="OnLoginClicked" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
